@@ -1,0 +1,16 @@
+{
+  "name": "@dictools/notifier",
+  "version": "1.0.0",
+  "description": "Dictionary notifier helps the team to know when the keys have changed by a Slack notification",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "Dictools",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/node": "^7.10.1"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.0"
+  }
+}
