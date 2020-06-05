@@ -2,13 +2,38 @@
   "name": "@dictools/notifier",
   "version": "1.0.0",
   "description": "Dictionary notifier helps the team to know when the keys have changed by a Slack notification",
-  "main": "src/index.js",
-  "scripts": {},
   "author": "Dictools",
   "license": "MIT",
+  "main": "src/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rimraf dist && webpack --config scripts/webpack/build.babel.js -d --progress --colors"
+  },
+  "engines": {
+    "node": ">=10.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dictools/notifier"
+  },
+  "bugs": {
+    "url": "https://github.com/dictools/notifier/issues"
+  },
   "devDependencies": {
+    "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.1",
-    "@babel/node": "^7.10.1"
+    "@babel/node": "^7.10.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^6.0.2",
+    "dotenv": "^8.2.0",
+    "generate-json-webpack-plugin": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "dependencies": {
     "node-fetch": "^2.6.0"

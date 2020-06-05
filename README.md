@@ -106,7 +106,7 @@ Let's see an example using [Husky](https://github.com/typicode/husky).
 {
   "husky": {
     "hooks": {
-      "post-commit": "node ./notification-script.js"
+      "post-commit": "node ./notification.js"
     }
   }
 }
