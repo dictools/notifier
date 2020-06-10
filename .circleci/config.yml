@@ -1,0 +1,118 @@
+version: 2
+
+aliases:
+  - &docker
+    - image: circleci/node:12.17.0
+
+  - &environment
+    TZ: "America/Sao_Paulo"
+
+  - &restore_yarn_cache
+    restore_cache:
+      name: Restore node_modules cache
+      keys:
+        - yarn-packages-{{ checksum "yarn.lock" }}
+        - yarn-packages-
+
+  - &run_yarn
+    run:
+      name: Install Packages
+      command: yarn --immutable
+
+  - &attach_workspace
+    at: ~/project
+
+  - &persist_workspace
+    root: ~/project
+    paths: .
+
+defaults: &defaults
+  docker: *docker
+  environment: *environment
+
+jobs:
+  setup:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - run:
+          name: Nodejs Version
+          command: node --version
+      - *restore_yarn_cache
+      - *run_yarn
+      - save_cache:
+          name: Save node_modules cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - persist_to_workspace: *persist_workspace
+
+  yarn_lint:
+    <<: *defaults
+
+    steps:
+      - attach_workspace: *attach_workspace
+      - run: yarn lint
+  
+  yarn_test:
+    <<: *defaults
+
+    steps:
+      - attach_workspace: *attach_workspace
+      - run: yarn test
+      - persist_to_workspace: *persist_workspace
+
+  yarn_build:
+    <<: *defaults
+
+    steps:
+      - attach_workspace: *attach_workspace
+      - run: yarn build
+      - persist_to_workspace: *persist_workspace
+
+  process_artifacts:
+    <<: *defaults
+
+    steps:
+      - attach_workspace: *attach_workspace
+      - run: 
+          name: Compress dist directory
+          command: tar -zcvf ./dist.tgz ./dist
+      - store_artifacts:
+          path: ./dist.tgz
+
+  yarn_deploy:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - attach_workspace: *attach_workspace
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ./.npmrc
+      - run: yarn publish ./dist
+    
+workflows:
+  version: 2
+  build_library:
+    jobs:
+      - setup
+      - yarn_lint:
+          requires:
+            - setup
+      - yarn_test:
+          requires:
+            - yarn_lint
+      - yarn_build:
+          requires:
+            - yarn_test
+      - process_artifacts:
+          requires:
+            - yarn_build
+      - yarn_deploy:
+          requires:
+            - yarn_build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

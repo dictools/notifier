@@ -5,7 +5,7 @@
 </p>
 
 ## Getting started
-Dictools Notifier is a tool used to notifies the development/content team using a slack webhooks based on a JSON file. Usually, it is used when the development team has the autonomy to create i18n dictionary keys directly in the code using a fallback file, this way it's not necessary to await the content team to create all keys before writing the code.
+Dictools Notifier is a tool used to notifies development/content team using a [slack webhook](https://api.slack.com/messaging/webhooks) based on a JSON file. Usually, it is used when the development team has the autonomy to create i18n dictionary keys directly in the code using a fallback file, this way it's not necessary to await the content team create the keys before writing the code.
 
 ## Installation
 Dictools Notifier can be installed using npm or yarn:
@@ -20,13 +20,14 @@ yarn add @dictools/notifier --dev
 
 ## Usage
 **Prerequisites:** 
+- [Slack Incoming Webhooks](https://api.slack.com/messaging/webhooks)
 - [NodeJS](https://nodejs.org/) (>=10.x.x) 
 - [Git](https://git-scm.com/) (>= 2.13.x)
 - Dictools Notifier should be used along with Git Hooks [ [post-commit](https://git-scm.com/docs/githooks#_post_commit) ] to recover information and compare your dictionary file. The library does not include built-in hooks, we recommend to use a third-party library like [husky](https://github.com/typicode/husky) or [build your own hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 
 **Script Initializer**
 
-Create a configuration file to start using `dictools/notifier`. The message can be formatted using the attachment format provided by slack, to know more details please check out the [documentation](https://api.slack.com/docs/messages/builder?msg=%7B%22attachments%22%3A%5B%7B%22fallback%22%3A%22Required%20plain-text%20summary%20of%20the%20attachment.%22%2C%22color%22%3A%22%2336a64f%22%2C%22pretext%22%3A%22Optional%20text%20that%20appears%20above%20the%20attachment%20block%22%2C%22author_name%22%3A%22Bobby%20Tables%22%2C%22author_link%22%3A%22http%3A%2F%2Fflickr.com%2Fbobby%2F%22%2C%22author_icon%22%3A%22http%3A%2F%2Fflickr.com%2Ficons%2Fbobby.jpg%22%2C%22title%22%3A%22Slack%20API%20Documentation%22%2C%22title_link%22%3A%22https%3A%2F%2Fapi.slack.com%2F%22%2C%22text%22%3A%22Optional%20text%20that%20appears%20within%20the%20attachment%22%2C%22fields%22%3A%5B%7B%22title%22%3A%22Priority%22%2C%22value%22%3A%22High%22%2C%22short%22%3Afalse%7D%5D%2C%22image_url%22%3A%22http%3A%2F%2Fmy-website.com%2Fpath%2Fto%2Fimage.jpg%22%2C%22thumb_url%22%3A%22http%3A%2F%2Fexample.com%2Fpath%2Fto%2Fthumb.png%22%2C%22footer%22%3A%22Slack%20API%22%2C%22footer_icon%22%3A%22https%3A%2F%2Fplatform.slack-edge.com%2Fimg%2Fdefault_application_icon.png%22%2C%22ts%22%3A123456789%7D%5D%7D)
+Create a configuration file to start using `dictools/notifier`. The message can be formatted using the attachment format provided by slack, to know more details please check out the [documentation](https://api.slack.com/docs/messages/builder?msg=%7B%22attachments%22%3A%5B%7B%22fallback%22%3A%22Required%20plain-text%20summary%20of%20the%20attachment.%22%2C%22color%22%3A%22%2336a64f%22%2C%22pretext%22%3A%22Optional%20text%20that%20appears%20above%20the%20attachment%20block%22%2C%22author_name%22%3A%22Bobby%20Tables%22%2C%22author_link%22%3A%22http%3A%2F%2Fflickr.com%2Fbobby%2F%22%2C%22author_icon%22%3A%22http%3A%2F%2Fflickr.com%2Ficons%2Fbobby.jpg%22%2C%22title%22%3A%22Slack%20API%20Documentation%22%2C%22title_link%22%3A%22https%3A%2F%2Fapi.slack.com%2F%22%2C%22text%22%3A%22Optional%20text%20that%20appears%20within%20the%20attachment%22%2C%22fields%22%3A%5B%7B%22title%22%3A%22Priority%22%2C%22value%22%3A%22High%22%2C%22short%22%3Afalse%7D%5D%2C%22image_url%22%3A%22http%3A%2F%2Fmy-website.com%2Fpath%2Fto%2Fimage.jpg%22%2C%22thumb_url%22%3A%22http%3A%2F%2Fexample.com%2Fpath%2Fto%2Fthumb.png%22%2C%22footer%22%3A%22Slack%20API%22%2C%22footer_icon%22%3A%22https%3A%2F%2Fplatform.slack-edge.com%2Fimg%2Fdefault_application_icon.png%22%2C%22ts%22%3A123456789%7D%5D%7D).
 
 ```js
 // notification.js
