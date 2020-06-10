@@ -12,8 +12,8 @@
     "build": "rimraf dist && webpack --config scripts/webpack/build.babel.js -d --progress --colors",
     "test": "jest -c scripts/jest/jest.config.json --colors",
     "test:watch": "jest -c scripts/jest/jest.config.json --colors --watchAll",
-    "lint": "eslint -c .eslintrc --fix \"./src/**/*.js\"",
-    "format": "prettier --config .prettierrc --write \"./src/**/**.js\" && git add ."
+    "lint": "eslint -c .eslintrc --fix",
+    "format": "prettier --config .prettierrc --write \"./src/**/**.js\" \"./test/**/**.js\" && git add ."
   },
   "engines": {
     "node": ">=10.13.0"

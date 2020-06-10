@@ -1,45 +1,49 @@
 import parser from "@utils/parser";
 
-describe('<root>/utils/parser.js', () => {
-  test('factoryObject() :: Should get key object with key details', () => {
+describe("<root>/utils/parser.js", () => {
+  test("factoryObject() :: Should get key object with key details", () => {
     const received = parser.factoryObject("key_001", "Key text", "Old key text");
     expect(received).toEqual({
       key: "key_001",
       value: "Key text",
-      oldValue: "Old key text"
+      oldValue: "Old key text",
     });
   });
 
-  test('factoryObject() :: Should get key object with default values', () => {
+  test("factoryObject() :: Should get key object with default values", () => {
     const received = parser.factoryObject(undefined, undefined, undefined);
     expect(received).toEqual({
       key: "",
-      value: ""
+      value: "",
     });
   });
 
-  test('stringToObject() :: Should get key/value populated when JSON follow the right format', () => {
-    const received = parser.stringToObject(`-  "key_001": "Teste - No, continue! % = + ) ( | / \\ _scanning* ' || [{]} ? > < .[!]~ Just, $ & ^ - testing, more, commas."`);
+  test("stringToObject() :: Should get key/value populated when JSON follow the right format", () => {
+    const received = parser.stringToObject(
+      `-  "key_001": "Teste - No, continue! % = + ) ( | / \\ _scanning* ' || [{]} ? > < .[!]~ Just, $ & ^ - testing, more, commas."`
+    );
     expect(received).toEqual({
       key: "key_001",
-      value: "Teste - No, continue! % = + ) ( | / \\ _scanning* ' || [{]} ? > < .[!]~ Just, $ & ^ - testing, more, commas."
+      value: "Teste - No, continue! % = + ) ( | / \\ _scanning* ' || [{]} ? > < .[!]~ Just, $ & ^ - testing, more, commas.",
     });
   });
 
-  test('stringToObject() :: Should get key/value empty when the string does not follow the right JSON format', () => {
-    const received = parser.stringToObject(`-  key_001: Teste - No, continue! % = + ) ( | / \\ _scanning* ' || [{]} ? > < .[!]~ Just, $ & ^ - testing, more, commas."`);
+  test("stringToObject() :: Should get key/value empty when the string does not follow the right JSON format", () => {
+    const received = parser.stringToObject(
+      `-  key_001: Teste - No, continue! % = + ) ( | / \\ _scanning* ' || [{]} ? > < .[!]~ Just, $ & ^ - testing, more, commas."`
+    );
     expect(received).toEqual({
       key: "",
-      value: ""
+      value: "",
     });
   });
 
-  test('parse() :: Should get diff object with added/removed/changed keys', () => {
+  test("parse() :: Should get diff object with added/removed/changed keys", () => {
     const received = parser.parse(global.gitDiff);
     expect(received).toStrictEqual(global.gitKeysParsed);
   });
 
-  test('parse() :: Should get diff object with added key', () => {
+  test("parse() :: Should get diff object with added key", () => {
     const diff = `
       diff --git a/dictionary.json b/dictionary.json
       index cbff224..78fe51e 100644
@@ -57,13 +61,13 @@ describe('<root>/utils/parser.js', () => {
     const received = parser.parse(diff);
     const expected = Object.assign({}, global.gitKeysParsed, {
       removed: [],
-      changed: []
+      changed: [],
     });
 
     expect(received).toEqual(expected);
   });
 
-  test('parse() :: Should get diff object with removed key', () => {
+  test("parse() :: Should get diff object with removed key", () => {
     const diff = `
       diff --git a/dictionary.json b/dictionary.json
       index cbff224..78fe51e 100644
@@ -81,13 +85,13 @@ describe('<root>/utils/parser.js', () => {
     const received = parser.parse(diff);
     const expected = Object.assign({}, global.gitKeysParsed, {
       added: [],
-      changed: []
+      changed: [],
     });
 
     expect(received).toEqual(expected);
   });
 
-  test('parse() :: Should get diff object with changed key', () => {
+  test("parse() :: Should get diff object with changed key", () => {
     const diff = `
       diff --git a/dictionary.json b/dictionary.json
       index cbff224..78fe51e 100644
@@ -106,13 +110,13 @@ describe('<root>/utils/parser.js', () => {
     const received = parser.parse(diff);
     const expected = Object.assign({}, global.gitKeysParsed, {
       added: [],
-      removed: []
+      removed: [],
     });
 
     expect(received).toEqual(expected);
   });
 
-  test('parse() :: Should get diff object with no changes', () => {
+  test("parse() :: Should get diff object with no changes", () => {
     const diff = `
       diff --git a/dictionary.json b/dictionary.json
       index cbff224..78fe51e 100644
@@ -132,7 +136,7 @@ describe('<root>/utils/parser.js', () => {
     const expected = Object.assign({}, global.gitKeysParsed, {
       added: [],
       removed: [],
-      changed: []
+      changed: [],
     });
 
     expect(received).toStrictEqual(expected);

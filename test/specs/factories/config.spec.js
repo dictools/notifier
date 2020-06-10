@@ -3,17 +3,17 @@ import GLOBALS from "@constants/globals";
 
 const mock = {};
 
-describe('<root>/factories/config.js', () => {
+describe("<root>/factories/config.js", () => {
   beforeEach(() => {
-    mock.config = JSON.parse(JSON.stringify(global.notifyConfig))
+    mock.config = JSON.parse(JSON.stringify(global.notifyConfig));
   });
 
-  test('get() :: Should get config options', () => {
+  test("get() :: Should get config options", () => {
     const received = config.get(mock.config);
     expect(received).toEqual(global.notifyConfig);
   });
 
-  test('get() :: Should get config options using fallback', () => {
+  test("get() :: Should get config options using fallback", () => {
     mock.config.path = "";
     mock.config.hookUri = "";
     mock.config.channel = "";
@@ -31,7 +31,7 @@ describe('<root>/factories/config.js', () => {
     mock.config.messages.removed.description = "";
     mock.config.messages.removed.body = "";
     mock.config.messages.removed.footer = "";
-    
+
     const received = config.get(mock.config);
     expect(received).toEqual({
       path: "",
@@ -41,26 +41,26 @@ describe('<root>/factories/config.js', () => {
       project: {
         name: "",
         boardUrl: "",
-        key: ""
+        key: "",
       },
       messages: {
         title: GLOBALS.MESSAGES.TITLE,
         added: {
           description: GLOBALS.MESSAGES.ADDED.DESCRIPTION,
           body: GLOBALS.MESSAGES.ADDED.BODY,
-          footer: ""
+          footer: "",
         },
         changed: {
           description: GLOBALS.MESSAGES.CHANGED.DESCRIPTION,
           body: GLOBALS.MESSAGES.CHANGED.BODY,
-          footer: ""
+          footer: "",
         },
         removed: {
           description: GLOBALS.MESSAGES.REMOVED.DESCRIPTION,
           body: GLOBALS.MESSAGES.REMOVED.BODY,
-          footer: ""
-        }
-      }
+          footer: "",
+        },
+      },
     });
   });
 });
