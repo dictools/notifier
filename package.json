@@ -9,7 +9,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && webpack --config scripts/webpack/build.babel.js -d --progress --colors"
+    "build": "rimraf dist && webpack --config scripts/webpack/build.babel.js -d --progress --colors",
+    "test": "jest -c scripts/jest/jest.config.json --colors",
+    "test:watch": "jest -c scripts/jest/jest.config.json --colors --watchAll"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -27,15 +29,17 @@
     "@babel/node": "^7.10.1",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
+    "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.0.2",
     "dotenv": "^8.2.0",
     "generate-json-webpack-plugin": "^1.0.0",
+    "jest": "^26.0.1",
     "rimraf": "^3.0.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0"
+    "@slack/webhook": "^5.0.3"
   }
 }

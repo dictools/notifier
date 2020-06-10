@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<root>/constants/globals.js Should globals match snapshot 1`] = `
+Object {
+  "COLORS": Object {
+    "ADDED": "#178667",
+    "CHANGED": "#FEC621",
+    "REMOVED": "#D73645",
+  },
+  "CORE": Object {
+    "TASK": "<#{url}/#{task}|#{task}>",
+  },
+  "MESSAGES": Object {
+    "ADDED": Object {
+      "BODY": "*Text:* #{value}",
+      "DESCRIPTION": "Dictionary key *#{key}* has been #{type}",
+    },
+    "CHANGED": Object {
+      "BODY": "*From:* #{oldValue}
+*To:* #{value}",
+      "DESCRIPTION": "Dictionary key *#{key}* has been #{type}",
+    },
+    "FOOTER": "*#{type} by:* #{username}",
+    "FOOTER_WITH_TASK": "*#{type} by:* #{username} | *Task:* #{task}",
+    "HOOK_ERROR": "
+[31m[Notifier] Error (#{code}): #{message}[0m
+",
+    "HOOK_NOTIFIED": "
+[32m[Notifier] Changes were notified.[0m
+",
+    "KEYS_UP_TO_DATE": "
+[32m[Notifier] Dictionary keys are up to date.[0m
+",
+    "REMOVED": Object {
+      "BODY": "*Text:* #{value}",
+      "DESCRIPTION": "Dictionary key *#{key}* has been #{type}",
+    },
+    "TITLE": "_Changes to #{project} dictionary key(s):_
+
+",
+    "VALIDATIONS": Object {
+      "hookUri": "Please define a hookUri to post the report { hookUri: <String> }",
+      "path": "Please define a dictionary path: { path: <String> }",
+      "project": "Please define the project properties { project: <Object> }",
+      "project.boardUrl": "Please define a project board url { project.boardUrl: <String> }",
+      "project.key": "Please define a project key { project.key: <String|Array|Regex> }",
+      "project.name": "Please define a project name { project.name: <String> }",
+    },
+  },
+}
+`;

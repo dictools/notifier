@@ -1,5 +1,6 @@
-import fetch from "node-fetch";
+import { IncomingWebhook } from "@slack/webhook";
 import GLOBALS from "../constants/globals";
+import string from "./string";
 
 const slack = {
   notify: async (hookUri, { text, attachments, channel, username }) => {
@@ -10,20 +11,19 @@ const slack = {
       text,
       attachments
     }
+    
+    const webhook = new IncomingWebhook(hookUri);
 
-    await fetch(hookUri, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(content),
-    })
-      .then((response) => {
-        if(response.status === 200) {
-          console.log(GLOBALS.MESSAGES.HOOK_NOTIFIED)
-        } else {
-          throw Error(`(${response.status}) ${response.statusText}`);
-        }
-      })
-      .catch(error => console.log(GLOBALS.MESSAGES.HOOK_ERROR, error));
+    await webhook.send(content)
+      .then(() => console.log(GLOBALS.MESSAGES.HOOK_NOTIFIED))
+      .catch(error => {
+        const message = string.replace(GLOBALS.MESSAGES.HOOK_ERROR, {
+          code: error.code,
+          ...(error?.original?.message && { message: error?.original?.message })
+        });
+
+        console.error(message);
+      });
   }
 }
 

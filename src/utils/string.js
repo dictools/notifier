@@ -25,7 +25,7 @@ const string = {
 
     return;
   },
-  getFormattedAttachment: (line = {}, type = "", commit = "", config = {}) => {
+  getAttachmentFormatted: (line, type, commit, config) => {
     const changeType = type.toUpperCase();
     const task = string.getTask(commit.message, config.project);
 
@@ -54,7 +54,7 @@ const string = {
 
     return {
       type,
-      color: GLOBALS.COLORS[changeType] || GLOBALS.COLORS.DEFAULT,
+      color: GLOBALS.COLORS[changeType],
       text: `${description}\n${body}`,
       footer
     }

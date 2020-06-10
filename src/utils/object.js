@@ -1,3 +1,7 @@
+const type = (value) => {
+  return (value && Object.prototype.toString.call(value).match(/^\[object\s(.*)\]$/)[1]);
+}
+
 const stringToPath = (path) => {
   const pattern = /\[([0-9]+)\]/g;
   if (pattern.test(path)) return path.replace(pattern, '.$1').split('.');
@@ -11,6 +15,10 @@ export const _get = (source, path, defaultArgument) => {
 };
 
 export const normalizeStringToJSON = (str) => {
-  const stringNormalized = str.replace(/"?([\w_\- ]+)"?\s*?:\s*?"?(.*?)"?\s*?([,}\]])/gsi, (str, index, item, end) => '"' + index.replace(/"/gsi, '').trim() + '":"' + item.replace(/"/gsi, '').trim() + '"' + end).replace(/,\s*?([}\]])/gsi, '$1').replace(/\'/g, '');
-  return JSON.parse(stringNormalized);
+  if(type(str) === "String") {
+    const stringNormalized = str.replace(/"?([\w_\- ]+)"?\s*?:\s*?"?(.*?)"?\s*?([,}\]])/gsi, (str, index, item, end) => '"' + index.replace(/"/gsi, '').trim() + '":"' + item.replace(/"/gsi, '').trim() + '"' + end).replace(/,\s*?([}\]])/gsi, '$1').replace(/\'/g, '');
+    return JSON.parse(stringNormalized);
+  }
+  
+  return str;
 }

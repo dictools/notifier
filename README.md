@@ -35,6 +35,8 @@ const Notifier = require("@dictools/notifier");
 const notification = new Notifier({
   path: "dictionary.json", // JSON file only
   hookUri: "<hooks_api>",
+  channel: "#acme-keys", // Optional
+  username: "Acme App", // Optional
   project: {
     name: "<project_name>",
     boardUrl: "<board_url>",
@@ -83,6 +85,8 @@ Options                        | Description                                    
 -------------------------------|---------------------------------------------------------------------------------------------------|-----------
 path                           | Defines the project's key map path                                                                | String
 hookUri                        | [Slack Webhooks](https://api.slack.com/messaging/webhooks) API url                                | String
+channel (Optional)             | Slack channel where will be posted the notification                                               | String
+username (Optional)            | Slack username that will be used to post the notification                                         | String
 project.name                   | Project name                                                                                      | String
 project.boardUrl               | It is used to link the notification with your project board `(e.g. https://jira.acme.com/browse)` | String
 project.key                    | Key is the project identifier used to find a task number in a commit message `e.g. feat(blog): ACM-0234 :: add comment section`                                                                                                               | `String: "ACM"`/ `Array: ["ACM", "AMC"]` / `Regex: /(ACM)-[0-9]+/g`

@@ -14,16 +14,7 @@ class Notifier {
   validate = () => {
     const config = this.config;
 
-    const messages = {
-      "path": "Please define a dictionary path: { path: <String> }",
-      "hookUri": "Please define a hookUri to post the report { hookUri: <String> }",
-      "project": "Please define the project properties { project: <Object> }",
-      "project.name": "Please define a project name { project.name: <String> }",
-      "project.boardUrl": "Please define a project board url { project.boardUrl: <String> }",
-      "project.key": "Please define a project key { project.key: <String|Array|Regex> }"
-    }
-
-    const validation = Object.entries(messages).reduce((acc, item) => {
+    const validation = Object.entries(GLOBALS.MESSAGES.VALIDATIONS).reduce((acc, item) => {
       const [path, message] = item;
       const data = objectUtils._get(config, path);
 
@@ -50,7 +41,7 @@ class Notifier {
       const diff = parser.parse(await git.diff(config.path));
       const haveKeysChanged = Object.values(diff).some(item => item.length);
 
-      if(commit.isRebase || commit.isMerge || (!haveKeysChanged && commit.isAmend)) return;
+      if(commit.isRebase || commit.isMerge || (!haveKeysChanged && commit.isAmend)) return false;
 
       if (haveKeysChanged) {
         const title = string.replace(config.messages.title, { 
@@ -59,7 +50,7 @@ class Notifier {
 
         const attachments = Object.keys(diff).reduce((acc, key) => {
           if (!!diff[key].length) {
-            return [...acc, ...diff[key].map(line => string.getFormattedAttachment(line, key, commit, config))];
+            return [...acc, ...diff[key].map(line => string.getAttachmentFormatted(line, key, commit, config))];
           }
 
           return acc;
@@ -69,8 +60,8 @@ class Notifier {
           config.hookUri,
           {
             channel: config.channel,
-            username: config.username,
-            text: title, 
+            username: config?.username || config?.project?.name,
+            text: title,
             attachments 
           }
         )
