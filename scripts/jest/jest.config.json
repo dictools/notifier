@@ -1,0 +1,27 @@
+{
+  "verbose": true,
+  "rootDir": "../../",
+  "coverageDirectory": "test/coverage/",
+  "setupFiles": [
+    "<rootDir>/scripts/jest/setup.js"
+  ],
+  "testMatch": [
+    "<rootDir>/test/specs/**/*.spec.js"
+  ],
+  "coverageReporters": [
+    "html",
+    "json"
+  ],
+  "collectCoverage": true,
+  "collectCoverageFrom": [
+    "src/**/*.js",
+    "!**/node_modules/**"
+  ],
+  "testPathIgnorePatterns": ["__mocks__", "__snapshots__"],
+  "moduleNameMapper": {
+    "^@root(.*)$": "<rootDir>/$1",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1",
+    "^@factories/(.*)$": "<rootDir>/src/factories/$1",
+    "^@constants/(.*)$": "<rootDir>/src/constants/$1"
+  }
+}

@@ -5,10 +5,10 @@
 </p>
 
 ## Getting started
-Dictools Notifier - It's a tool used to notifies the development/content team using a slack webhooks based on a JSON file. Usually, it is used when the development team has the autonomy to create i18n dictionary keys directly in the code using a fallback file, this way it's not necessary to await the content team to create all keys before writing the code.
+Dictools Notifier is a tool used to notifies the development/content team using a slack webhooks based on a JSON file. Usually, it is used when the development team has the autonomy to create i18n dictionary keys directly in the code using a fallback file, this way it's not necessary to await the content team to create all keys before writing the code.
 
 ## Installation
-You can install Dictools Notifier using npm or yarn:
+Dictools Notifier can be installed using npm or yarn:
 
 ```bash
 # npm
@@ -34,25 +34,27 @@ const Notifier = require("@dictools/notifier");
 
 const notification = new Notifier({
   path: "dictionary.json", // JSON file only
-  hookUri: "<hooks_api>",
+  hookUri: "https://hooks.slack.com/services/<api_token>",
+  channel: "#acme-keys", // Optional
+  username: "Acme", // Optional
   project: {
-    name: "<project_name>",
-    boardUrl: "<board_url>",
-    key: "<task_key_identifier>"
+    name: "Acme App",
+    boardUrl: "https://jira.acme.com/browse",
+    key: "ACM" // (e.g. Task number ACM-0234)
   }
   /** 
-   * Optional Configuration: ( Slack Notifications Replacement )
-   * Text has available replacement keys(#{key}) it can be used to get information from the project and git diff
+   * Optional Configuration: ( Slack message replacement )
+   * Text has available replacement keys that is used to get information from the project or git diff
    * and it can be customized as you need.
    */
   messages: {
     /** 
-     * Replacement key details
+     * Check out the available text keys
      * @param {string} #{project} - Project name
      * @param {string} #{key} - Dictionary key name
      * @param {string} #{type} - Git change type (e.g. Added, Changed, Removed)
      * @param {string} #{username} - Git committer name (Global or locally git username)
-     * @param {string} #{task} - Task link to the board (e.g. https://jira.acme.com/browse/ACM-0234)
+     * @param {string} #{task} - Task link for the board (e.g. https://jira.acme.com/browse/ACM-0234)
      * @param {string} #{value} - Current content key value
      * @param {string} #{oldValue} - Previous content key value
      */
@@ -83,6 +85,8 @@ Options                        | Description                                    
 -------------------------------|---------------------------------------------------------------------------------------------------|-----------
 path                           | Defines the project's key map path                                                                | String
 hookUri                        | [Slack Webhooks](https://api.slack.com/messaging/webhooks) API url                                | String
+channel (Optional)             | Slack channel where will be posted the notification                                               | String
+username (Optional)            | Slack username that will be used to post the notification                                         | String
 project.name                   | Project name                                                                                      | String
 project.boardUrl               | It is used to link the notification with your project board `(e.g. https://jira.acme.com/browse)` | String
 project.key                    | Key is the project identifier used to find a task number in a commit message `e.g. feat(blog): ACM-0234 :: add comment section`                                                                                                               | `String: "ACM"`/ `Array: ["ACM", "AMC"]` / `Regex: /(ACM)-[0-9]+/g`

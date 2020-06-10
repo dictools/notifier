@@ -1,7 +1,7 @@
 import GLOBALS from "../constants/globals";
 
 const config = {
-  get: (options) => ({
+  get: options => ({
     path: options.path || "",
     hookUri: options.hookUri || "",
     channel: options.channel || "", // Optional prop
@@ -27,9 +27,9 @@ const config = {
         description: options?.messages?.removed?.description || GLOBALS.MESSAGES.REMOVED.DESCRIPTION,
         body: options?.messages?.removed?.body || GLOBALS.MESSAGES.REMOVED.BODY,
         footer: options?.messages?.removed?.footer || "",
-      }
-    }
-  })
-}
+      },
+    },
+  }),
+};
 
 export default config;
