@@ -105,9 +105,17 @@ workflows:
       - yarn_build:
           requires:
             - yarn_test
+          filters:
+            branches:
+              only:
+                - master
       - process_artifacts:
           requires:
             - yarn_build
+          filters:
+            branches:
+              only:
+                - master
       - yarn_deploy:
           requires:
             - yarn_build
