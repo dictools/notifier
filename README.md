@@ -11,11 +11,17 @@
     <img alt="MIT License" src="https://img.shields.io/github/license/dictools/notifier?color=027EC5&style=flat-square"
     />
   </a>
+
+  <a href="https://www.npmjs.com/package/@dictools/notifier">
+    <img alt="npm" src="https://img.shields.io/npm/v/@dictools/notifier?style=flat-square">
+  </a>
   
   <a href="https://circleci.com/gh/dictools/notifier">
     <img alt="CircleCI" src="https://img.shields.io/circleci/build/github/dictools/notifier/master?style=flat-square"
     />
   </a>
+
+  <br />
 
   <a href='https://coveralls.io/github/dictools/notifier?branch=master'>
     <img alt="Coveralls Status" src="https://img.shields.io/coveralls/github/dictools/notifier?style=flat-square"
