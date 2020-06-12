@@ -143,7 +143,9 @@ Let's see an example using [Husky](https://github.com/typicode/husky).
 After setting up the hook start to commit normally and as soon as you have new changes to the dictionary you will receive a notification on the configured slack channel.
 
 **Slack message preview**
-<img alt="Dictools Notifier" src="./.github/slack-message@2x.png" width="600">
+<p>
+  <img alt="Dictools Notifier" src="./.github/slack-message@2x.png" width="600">
+</p>
 
 ## Contributing
 Thanks for being interested in helping us to improve the experience for who use this library, we are all ears to listen, if you want to collaborate reporting an issue, feature or something else please use the [issues](https://github.com/dictools/notifier/issues) section using the proper labels to your request, we will answer as soon as we can, thank you!
