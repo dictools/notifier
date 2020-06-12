@@ -9,8 +9,7 @@
     "<rootDir>/test/specs/**/*.spec.js"
   ],
   "coverageReporters": [
-    "html",
-    "json"
+    "lcov"
   ],
   "collectCoverage": true,
   "collectCoverageFrom": [

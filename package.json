@@ -1,7 +1,7 @@
 {
   "name": "@dictools/notifier",
   "version": "1.0.0",
-  "description": "Dictionary notifier helps the team to know when the keys have changed by a Slack notification",
+  "description": "Dictools Notifier help the team to know when the dictionary keys have changed by a Slack notification",
   "author": "Dictools",
   "license": "MIT",
   "main": "src/index.js",
@@ -13,7 +13,8 @@
     "test": "jest -c scripts/jest/jest.config.json --colors",
     "test:watch": "jest -c scripts/jest/jest.config.json --colors --watchAll",
     "lint": "eslint -c .eslintrc --fix",
-    "format": "prettier --config .prettierrc --write \"./src/**/**.js\" \"./test/**/**.js\" && git add ."
+    "format": "prettier --config .prettierrc --write \"./src/**/**.js\" \"./test/**/**.js\" && git add .",
+    "coveralls": "coveralls < ./test/coverage/lcov.info"
   },
   "engines": {
     "node": ">=10.13.0"
@@ -35,6 +36,7 @@
     "babel-jest": "^26.0.1",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.0.2",
+    "coveralls": "^3.1.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",

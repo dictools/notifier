@@ -4,6 +4,30 @@
   </a>
 </p>
 
+<br />
+
+<p align="center">
+  <a href="https://github.com/dictools/notifier/blob/master/LICENSE">
+    <img alt="MIT License" src="https://img.shields.io/github/license/dictools/notifier?color=027EC5&style=flat-square"
+    />
+  </a>
+  
+  <a href="https://circleci.com/gh/dictools/notifier">
+    <img alt="CircleCI" src="https://img.shields.io/circleci/build/github/dictools/notifier/master?style=flat-square"
+    />
+  </a>
+
+  <a href='https://coveralls.io/github/dictools/notifier?branch=master'>
+    <img alt="Coveralls Status" src="https://img.shields.io/coveralls/github/dictools/notifier?style=flat-square"
+    />
+  </a>
+
+  <a href="https://github.com/dictools/notifier#contributing">
+    <img alt="PRs Welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square"
+    />
+  </a>
+</p>
+
 ## Getting started
 Dictools Notifier is a tool used to notifies development/content team using a [slack webhook](https://api.slack.com/messaging/webhooks) based on a JSON file. Usually, it is used when the development team has the autonomy to create i18n dictionary keys directly in the code using a fallback file, this way it's not necessary to await the content team create the keys before writing the code.
 

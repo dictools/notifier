@@ -61,6 +61,7 @@ jobs:
     steps:
       - attach_workspace: *attach_workspace
       - run: yarn test
+      - run: yarn coveralls
       - persist_to_workspace: *persist_workspace
 
   yarn_build:
