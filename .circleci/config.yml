@@ -125,3 +125,52 @@ workflows:
               only: /^v.*/
             branches:
               ignore: /.*/
+
+  build_deploy_library:
+    jobs:
+      - setup:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - yarn_lint:
+          requires:
+            - setup
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - yarn_test:
+          requires:
+            - yarn_lint
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - yarn_build:
+          requires:
+            - yarn_test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - process_artifacts:
+          requires:
+            - yarn_build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - yarn_deploy:
+          requires:
+            - yarn_build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
