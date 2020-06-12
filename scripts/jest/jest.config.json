@@ -17,6 +17,7 @@
     "!**/node_modules/**"
   ],
   "testPathIgnorePatterns": ["__mocks__", "__snapshots__"],
+  "modulePathIgnorePatterns": [ "<rootDir>/dist" ],
   "moduleNameMapper": {
     "^@root(.*)$": "<rootDir>/$1",
     "^@utils/(.*)$": "<rootDir>/src/utils/$1",

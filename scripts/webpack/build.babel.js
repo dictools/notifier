@@ -3,6 +3,7 @@ import path from "path";
 import webpack from "webpack";
 import CopyPlugin from "copy-webpack-plugin";
 import GenerateJsonPlugin from "generate-json-webpack-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 import banner from "./banner";
 import pkg from "../../package.json";
 
@@ -21,6 +22,17 @@ const build = {
   },
   optimization: {
     minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: /@license/i,
+          },
+        },
+        extractComments: false,
+        sourceMap: false,
+      }),
+    ],
   },
   module: {
     rules: [
