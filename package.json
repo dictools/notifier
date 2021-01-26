@@ -1,6 +1,6 @@
 {
   "name": "@dictools/notifier",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Dictools Notifier help the team to know when the dictionary keys have changed by Slack notification",
   "author": "Dictools",
   "license": "MIT",
